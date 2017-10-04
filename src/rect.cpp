@@ -1,4 +1,4 @@
-9*#include "rect.h"
+#include "rect.h"
 
 void Rect :: drawObj(HDC hDC, HPEN hPen, int R, int G, int B,int size){
 	hPen = CreatePen(PS_SOLID, size,RGB(R,G,B));
