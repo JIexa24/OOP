@@ -4,7 +4,6 @@
 #define stepp 4
 #include "line.h"
 #include "figure.h"
-#include "move.h"
 #include <stdlib.h>
 #include <math.h>
 class Poly : public Figure {
