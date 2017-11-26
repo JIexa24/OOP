@@ -122,7 +122,11 @@ LRESULT CALLBACK WndProc(HWND hMainWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				sn.draw(hDC);
 				app.draw(hDC);
 				sn.move();
-				Sleep(500);
+				printf("%d = %d | %d = %d\n",sn.getHeadx() , app.getx(), sn.getHeady(), app.gety() );
+				if(sn.getHeadx() == app.getx() && sn.getHeady() == app.gety()){
+					sn.eat(&app);
+				}
+				Sleep(150);
         EndPaint(hMainWnd, &ps); //заканчиваем рисовать
         if (rungame) {
         InvalidateRect(hMainWnd,NULL,TRUE); // команда на перерисовку окна

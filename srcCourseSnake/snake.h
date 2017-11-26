@@ -4,7 +4,6 @@
 #include <time.h>
 #define SIZEX 700
 #define SIZEY 700
-#define STEP 25
 typedef struct Coords { 
 int x; 
 int y; 
@@ -29,6 +28,18 @@ public:
   ~Screen(); 
 };
 
+class Apple : public Screen {
+	private:
+		coord xy;
+	public:
+		Apple();
+		int getx();
+		int gety();
+		void draw(HDC hdc);
+		void generate();
+		~Apple();
+};
+
 class Snake : public Screen {
 	private:
 		int len;
@@ -38,17 +49,10 @@ class Snake : public Screen {
 	public:
 		Snake(int xhead, int yhead);
         void move();
+        void eat(Apple* app);
+        int getHeadx();
+        int getHeady();
 		void setVector(int vec);
 		void draw(HDC hdc); 
 		~Snake();
-};
-
-class Apple : public Screen {
-	private:
-		coord xy;
-	public:
-		Apple();
-		void draw(HDC hdc);
-		void generate();
-		~Apple();
 };

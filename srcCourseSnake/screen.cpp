@@ -1,6 +1,6 @@
 
 #include "snake.h"
-#define STEP 24
+#define STEP 25
 
 extern int rungame;
 
@@ -49,7 +49,7 @@ Snake :: Snake(int xhead, int yhead) : Screen(SIZEX,SIZEY) {
 		this->coords[i].x = xhead - i;
 		this->coords[i].y = yhead;
 	}
-	this->vector = 0;
+	this->vector = 1;
 	this->move1 = 1;
 }
 
@@ -104,23 +104,27 @@ void Snake::move(){
 		this->coords[i].y = this->coords[i - 1].y;
 	}
 	switch(this->vector){
-  		case 3:{  	
+  		case 3:{  
   		this->coords[0].x -= 1;
+  		if (this->coords[0].x < 0) this->coords[0].x = this->getkx() - 1;
     	};
 		break;
 			
   		case 0:{    
 		this->coords[0].y -= 1;
+  		if (this->coords[0].y < 0) this->coords[0].y = this->getky() - 1;
 	    };
 		break;
 		
   		case 1:{  		
 		this->coords[0].x += 1;
+  		if (this->coords[0].x > this->getkx()) this->coords[0].x = 0;
 		};
 		break;
 			
   		case 2:{	
 		this->coords[0].y += 1;
+  		if (this->coords[0].y > this->getky()) this->coords[0].y = 0;
 		};
 		break;
 	};	
@@ -150,6 +154,22 @@ void Snake::setVector(int vec){
   	  this->vector = vec;
 }
 
+int Snake::getHeadx(){
+	return this->coords[0].x;
+}
+
+int Snake::getHeady(){
+	return this->coords[0].y;
+}
+
+void Snake::eat(Apple* app){
+	app->generate();
+	this->len = this->len+1;
+    this->coords = (coord*)realloc(this->coords ,sizeof(coord) * this->len);
+    this->coords[len - 1].x = this->coords[len - 2].x;
+    this->coords[len - 1].y = this->coords[len - 2].y;
+}
+
 Snake::~Snake(){
 	free(this->coords);
 }
@@ -159,16 +179,23 @@ Apple::Apple() : Screen(SIZEX,SIZEY) {
 }
 
 void Apple::generate(){
-	this->xy.x = getrand(0, getkx()+1) * STEP;
-	this->xy.y = getrand(0, getky()+1) * STEP;
+	this->xy.x = getrand(0, getkx()+1);
+	this->xy.y = getrand(0, getky()+1);
 }
 
 void Apple::draw(HDC hDC){
 	HPEN hPen = CreatePen(PS_SOLID, 4, RGB(255,0,0));
     SelectObject(hDC, hPen);
-	Rectangle(hDC, this->xy.x, this->xy.y, this->xy.x + STEP, this->xy.y + STEP);
+	Rectangle(hDC, this->xy.x  * STEP, this->xy.y  * STEP , this->xy.x  * STEP + STEP, this->xy.y  * STEP + STEP);
 	DeleteObject(hPen);
 }
 
+int Apple::getx(){
+	return xy.x;
+}
+
+int Apple::gety(){
+	return xy.y;
+}
 Apple::~Apple(){}
 
