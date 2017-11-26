@@ -118,13 +118,13 @@ void Snake::move(){
 		
   		case 1:{  		
 		this->coords[0].x += 1;
-  		if (this->coords[0].x > this->getkx()) this->coords[0].x = 0;
+  		if (this->coords[0].x > this->getkx() - 1) this->coords[0].x = 0;
 		};
 		break;
 			
   		case 2:{	
 		this->coords[0].y += 1;
-  		if (this->coords[0].y > this->getky()) this->coords[0].y = 0;
+  		if (this->coords[0].y > this->getky() - 1) this->coords[0].y = 0;
 		};
 		break;
 	};	
@@ -179,8 +179,8 @@ Apple::Apple() : Screen(SIZEX,SIZEY) {
 }
 
 void Apple::generate(){
-	this->xy.x = getrand(0, getkx()+1);
-	this->xy.y = getrand(0, getky()+1);
+	this->xy.x = getrand(0, getkx());
+	this->xy.y = getrand(0, getky());
 }
 
 void Apple::draw(HDC hDC){

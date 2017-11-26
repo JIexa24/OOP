@@ -9,24 +9,24 @@ using namespace std;
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
-int WINAPI WinMain(HINSTANCE hInst, /* hInstance СЏРІР»СЏРµС‚СЃСЏ РґРµСЃРєСЂРёРїС‚РѕСЂРѕРј СЌРєР·РµРјРїР»СЏСЂР° РѕРєРЅР° */
-                   HINSTANCE hPrevInst, /* hInstance СЏРІР»СЏРµС‚СЃСЏ РґРµСЃРєСЂРёРїС‚РѕСЂРѕРј СЌРєР·РµРјРїР»СЏСЂР° РѕРєРЅР° */
-                   LPSTR lpCmdLine, /* hInstance СЏРІР»СЏРµС‚СЃСЏ РґРµСЃРєСЂРёРїС‚РѕСЂРѕРј СЌРєР·РµРјРїР»СЏСЂР° РѕРєРЅР° */
-                   int nCmdShow) /* РѕРїСЂРµРґРµР»СЏРµС‚ СЃРїРѕСЃРѕР± РїРѕРєР°Р·Р° РѕРєРЅР° РЅСѓР¶РµРЅ РґР»СЏ showwindow */
+int WINAPI WinMain(HINSTANCE hInst, /* hInstance является дескриптором экземпляра окна */
+                   HINSTANCE hPrevInst, /* hInstance является дескриптором экземпляра окна */
+                   LPSTR lpCmdLine, /* hInstance является дескриптором экземпляра окна */
+                   int nCmdShow) /* определяет способ показа окна нужен для showwindow */
 {	
 	/*struct tagWNDCLASSEX{
-      UINT cbSize; //РІРµР»РёС‡РёРЅР° СЃС‚СЂСѓРєС‚СѓСЂС‹ РІ Р±Р°Р№С‚Р°С…
-      UINT style; // СЃС‚РёР» РєР»Р°СЃСЃР° РѕРєРЅР°
-      WNDPROC WndProc; // РЈРєР°Р·Р°С‚РµР»СЊ РЅР° РёРјСЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЊСЃРєРѕР№ С„СѓРЅРєС†РёРё
-      int cbWndExtra; // С‡РёСЃР»Рѕ РѕСЃРІРѕР±РѕР¶РґР°РµРјС‹С… Р±Р°Р№С‚РѕРІ
-      int cbClsExtra; // С‚Рѕ Р¶РєРµ С‡С‚Рѕ Рё РІС‹С€Рµ РЅРѕ РґР»СЏ СЌРєР·РµРјРїР»СЏСЂР° РїСЂРёР»РѕР¶РµРЅРёСЏ
-      HICON hIcon; // РґРµСЃРєСЂРёРїС‚РѕСЂ Р·РЅР°С‡РєР°
-      HICON hIconMini; // .... С‚СЂРµР№
-      HCURSOR hCursor; // .... РєСѓСЂСЃРѕСЂР°
-      HBRUSH hbrBack; // .... С†РІРµС‚ С„РѕРЅР°
-      HINSTANCE hInst; // .... СЌРєР·РµРјРїР»СЏСЂР° РїСЂРёР»РѕР¶РµРЅРёСЏ
-      LPCTSTR lpszClassName; // СѓРєР°Р·Р°С‚РµР»СЊ РЅР° const-СЃС‚СЂРѕРєСѓ СЃ РёРјРµРЅРµРј РєР»Р°СЃСЃР°
-      LPCTSTR lpszMenuName; // СЃРѕРґРµСЂР¶Р°С‰СѓСЋ РјРµРЅСЋ СЃ РёРјРµРЅРµРј РєР»Р°СЃСЃР°
+      UINT cbSize; //величина структуры в байтах
+      UINT style; // стил класса окна
+      WNDPROC WndProc; // Указатель на имя пользовательской функции
+      int cbWndExtra; // число освобождаемых байтов
+      int cbClsExtra; // то жке что и выше но для экземпляра приложения
+      HICON hIcon; // дескриптор значка
+      HICON hIconMini; // .... трей
+      HCURSOR hCursor; // .... курсора
+      HBRUSH hbrBack; // .... цвет фона
+      HINSTANCE hInst; // .... экземпляра приложения
+      LPCTSTR lpszClassName; // указатель на const-строку с именем класса
+      LPCTSTR lpszMenuName; // содержащую меню с именем класса
 }WNDCLASSEX;*/
 	HWND hMainWnd;  //windowsDescriptor;
 	TCHAR szClassName[] = "My Class";
@@ -52,17 +52,17 @@ int WINAPI WinMain(HINSTANCE hInst, /* hInstance СЏРІР»СЏРµС‚СЃСЏ РґРµСЃРєСЂРёРї
   }
     
 	hMainWnd = CreateWindow(
-							szClassName, // РёРјСЏ РєР»Р°СЃСЃ
-							"WindowOne", // РРјСЏ РѕРєРЅР°
-							WS_OVERLAPPEDWINDOW,// | WS_VSCROLL, //СЂРµР¶РёРјС‹ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ РѕРєРЅР°
-							50, //РїРѕР·РёС†РёСЏ РїРѕ РёРєСЃ CW_USEDEFAULT
-							50, // РїРѕР·РёС†РёСЏ РїРѕ РёРіСЂРµРє, РµСЃР»Рё РґРµС„РѕР»С‚ РёРєСЃ С‚Рѕ РЅРѕР»СЊ
-							716, //  С€РёСЂРёРЅР° РѕРєРЅР° CW_USEDEFAULT
- 							739, // РІС‹СЃРѕС‚Р°. С‚РѕР¶Рµ РёР·Р·Р° РґРµС„РѕР»С‚Р°
-							(HWND)NULL, // РґРµСЃРєСЂРёРїС‚РѕСЂ СЂРѕРґРёС‚РµР»СЊСЃРєРѕРіРѕ РѕРєРЅР°
-						 	NULL, // РґРµСЃРєСЂРёРїС‚РѕСЂ РјРµРЅСЋ
- 							HINSTANCE(hInst), // Рё СЌРєР·РµРјРїР»СЏСЂР° РїСЂРёР»РѕР¶РµРЅРёСЏ
-						 	NULL); // РЅРёС‡РµРіРѕ РЅРµ РїРµСЂРµРґР°РµРј РёР· WndProc
+							szClassName, // имя класс
+							"WindowOne", // Имя окна
+							WS_OVERLAPPEDWINDOW,// | WS_VSCROLL, //режимы отображения окна
+							50, //позиция по икс CW_USEDEFAULT
+							50, // позиция по игрек, если дефолт икс то ноль
+							716, //  ширина окна CW_USEDEFAULT
+ 							739, // высота. тоже изза дефолта
+							(HWND)NULL, // дескриптор родительского окна
+						 	NULL, // дескриптор меню
+ 							HINSTANCE(hInst), // и экземпляра приложения
+						 	NULL); // ничего не передаем из WndProc
 						 	
 	if(!hMainWnd) {
 		MessageBox(NULL, "Can't create window", "Error", MB_OK);
@@ -83,10 +83,10 @@ int WINAPI WinMain(HINSTANCE hInst, /* hInstance СЏРІР»СЏРµС‚СЃСЏ РґРµСЃРєСЂРёРї
 
 LRESULT CALLBACK WndProc(HWND hMainWnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 
-    HDC hDC,hDC1; // Р”РµСЃРєСЂРёРїС‚РѕСЂ РѕСЂРёРµРЅС‚Р°С†РёРё С‚РµРєСЃС‚Р°
-    PAINTSTRUCT ps; //РЎС‚СЂСѓРєС‚СѓСЂР° РєР»РёРµРЅС‚СЃРєРѕР№ РѕР±Р»Р°СЃС‚Рё(СЂР°Р·РјРµСЂ,С‚РёРї..)
-    RECT rect; // СЂР°Р·РјРµСЂ РєР»РёРµРЅС‚СЃРєРѕР№ РѕР±Р»Р°СЃС‚Рё   
-        //GetClientRect(hWnd, &rect); // РѕР±Р»Р°СЃС‚СЊ СЂРёСЃРѕРІР°РЅРёСЏ
+    HDC hDC,hDC1; // Дескриптор ориентации текста
+    PAINTSTRUCT ps; //Структура клиентской области(размер,тип..)
+    RECT rect; // размер клиентской области   
+        //GetClientRect(hWnd, &rect); // область рисования
     switch(uMsg){
     case WM_KEYDOWN:{
   	  unsigned int key = wParam;
@@ -114,9 +114,9 @@ LRESULT CALLBACK WndProc(HWND hMainWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	  };
 	break;
 
-    case WM_PAINT: {// РµСЃР»Рё СЂРёСЃРѕРІР°С‚СЊ
-        hDC = BeginPaint(hMainWnd, &ps);//РєРѕРЅС‚РµРєСЃС‚ СѓСЃС‚СЂРѕР№СЃС‚РІР° 
-        GetClientRect(hMainWnd, &rect); // РѕР±Р»Р°СЃС‚СЊ СЂРёСЃРѕРІР°РЅРёСЏ
+    case WM_PAINT: {// если рисовать
+        hDC = BeginPaint(hMainWnd, &ps);//контекст устройства 
+        GetClientRect(hMainWnd, &rect); // область рисования
 				HPEN hPen;	
 				scr.draw(hDC);
 				sn.draw(hDC);
@@ -127,16 +127,16 @@ LRESULT CALLBACK WndProc(HWND hMainWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 					sn.eat(&app);
 				}
 				Sleep(150);
-        EndPaint(hMainWnd, &ps); //Р·Р°РєР°РЅС‡РёРІР°РµРј СЂРёСЃРѕРІР°С‚СЊ
+        EndPaint(hMainWnd, &ps); //заканчиваем рисовать
         if (rungame) {
-        InvalidateRect(hMainWnd,NULL,TRUE); // РєРѕРјР°РЅРґР° РЅР° РїРµСЂРµСЂРёСЃРѕРІРєСѓ РѕРєРЅР°
+        InvalidateRect(hMainWnd,NULL,TRUE); // команда на перерисовку окна
 		}
         else{
         PostQuitMessage(0); 
 		}
 				};
         break;
-    case WM_DESTROY: //Р•СЃР»Рё Р·Р°РєСЂС‹Р»РѕСЃСЊ РѕРєРЅРѕ - РѕС‚РїСЂР°РІР»СЏРµРј РЅСѓР»Р»
+    case WM_DESTROY: //Если закрылось окно - отправляем нулл
         PostQuitMessage(0); 
        // KillTimer(hMainWnd, 1);
         break;
@@ -146,7 +146,7 @@ case WM_LBUTTONDOWN:
        // KillTimer(hMainWnd, 1);
 break;
     default:
-        return DefWindowProc(hMainWnd, uMsg, wParam, lParam); //РµСЃР»Рё Р·Р°РєСЂС‹Р»Рё РѕРєРЅРѕ
+        return DefWindowProc(hMainWnd, uMsg, wParam, lParam); //если закрыли окно
     }
     return 0; 
 }
