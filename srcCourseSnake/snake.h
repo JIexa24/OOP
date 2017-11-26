@@ -1,5 +1,6 @@
 #include <windows.h>
 #include <stdlib.h>
+#include <time.h>
 #define SIZEX 700
 #define SIZEY 700
 typedef struct Coords { 
@@ -20,6 +21,8 @@ private:
   int ky;
 public: 
   Screen(int x, int y):sizex(x),sizey(y){}; 
+  int getkx();
+  int getky();
   virtual void draw(HDC hDC); 
   ~Screen(); 
 };
@@ -38,7 +41,7 @@ class Snake : public Screen {
 		~Snake();
 };
 
-class Apple : Screen {
+class Apple : public Screen {
 	private:
 		coord xy;
 	public:

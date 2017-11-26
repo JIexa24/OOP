@@ -22,7 +22,16 @@ void Screen :: draw(HDC hDC)
     }
   	DeleteObject(hPen);
 }
-Screen :: ~Screen(){};
+
+int Screen :: getkx(){
+	return kx;
+}
+
+int Screen :: getky(){
+	return ky;
+}
+
+Screen :: ~Screen(){}
 
 Snake :: Snake(int xhead, int yhead) : Screen(SIZEX,SIZEY) {
 	this->len = 9;
@@ -135,3 +144,19 @@ void Snake::setVector(int vec){
 Snake::~Snake(){
 	free(this->coords);
 }
+
+Apple::Apple() : Screen(SIZEX,SIZEY) {
+	this->generate();
+}
+
+void Apple::generate(){
+	this->xy.x = rand() % getkx();
+	this->xy.y = rand() % getky();
+}
+
+void Apple::draw(HDC hDC){
+	
+}
+
+Apple::~Apple(){}
+
