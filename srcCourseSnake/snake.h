@@ -20,7 +20,8 @@ private:
   int sizey;
   int kx;
   int ky;
-public: 
+public:
+  Screen();
   Screen(int x, int y); 
   int getkx();
   int getky();
