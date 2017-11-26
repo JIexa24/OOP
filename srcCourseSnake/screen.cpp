@@ -1,5 +1,6 @@
 
 #include "snake.h"
+#define STEP 24
 
 extern int rungame;
 
@@ -63,8 +64,8 @@ void Snake::draw(HDC hDC)
 	  MoveToEx(hDC, this->coords[i].x * STEP, this->coords[i].y * STEP, NULL); //сделать текущими координаты x1, y
 	  LineTo(hDC, this->coords[i].x * STEP + STEP, this->coords[i].y * STEP + STEP);	// /
 	  
-	  MoveToEx(hDC, this->coords[i].x * STEP + STEP, this->coords[i].y * STEP , NULL); //сделать текущими координаты x1, y
-	  LineTo(hDC, this->coords[i].x * STEP, this->coords[i].y * STEP + STEP);	// \
+	  MoveToEx(hDC, this->coords[i].x * STEP + STEP, this->coords[i].y * STEP  , NULL); //сделать текущими координаты x1, y
+	  LineTo(hDC, this->coords[i].x * STEP, this->coords[i].y * STEP  + STEP);	// \
 	  
 	  
 	  MoveToEx(hDC, this->coords[i].x * STEP + STEP/2, this->coords[i].y * STEP, NULL); //сделать текущими координаты x1, y
