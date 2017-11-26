@@ -29,12 +29,12 @@ public:
   virtual void draw(HDC hDC); 
   ~Screen(); 
 };
-
+class Snake;
 class Apple : public Screen {
 	private:
 		coord xy;
 	public:
-		Apple();
+		Apple(Snake* snk);
 		int getx();
 		int gety();
 		void draw(HDC hdc);
@@ -54,6 +54,9 @@ class Snake : public Screen {
         void eat(Apple* app);
         int getHeadx();
         int getHeady();
+        int getCoordsxi(int i);
+        int getCoordsyi(int i);
+        int getLen();
 		void setVector(int vec);
 		void draw(HDC hdc); 
 		~Snake();

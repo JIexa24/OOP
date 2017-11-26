@@ -3,7 +3,7 @@
 
 Screen scr(SIZEX,SIZEY);
 Snake sn(15,10);
-Apple app;
+Apple app(&sn);
 int rungame = 1;
 int score = 0;
 using namespace std;
@@ -119,7 +119,7 @@ LRESULT CALLBACK WndProc(HWND hMainWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         hDC = BeginPaint(hMainWnd, &ps);//???????? ?????????? 
         GetClientRect(hMainWnd, &rect); // ??????? ?????????
 				HPEN hPen;	
-				scr.draw(hDC); // kletochki
+				//scr.draw(hDC); // kletochki
 				sn.draw(hDC);
 				app.draw(hDC);
 				sn.move();
@@ -127,7 +127,7 @@ LRESULT CALLBACK WndProc(HWND hMainWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				if(sn.getHeadx() == app.getx() && sn.getHeady() == app.gety()){
 					sn.eat(&app);
 				}
-				Sleep(50);
+				Sleep(100);
         EndPaint(hMainWnd, &ps); //??????????? ????????
         if (rungame) {
         InvalidateRect(hMainWnd,NULL,TRUE); // ??????? ?? ??????????? ????

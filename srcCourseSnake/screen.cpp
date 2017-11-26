@@ -1,6 +1,5 @@
 #include "snake.h"
-#define STEP 10
-
+#define STEP 15
 extern int rungame;
 extern int score;
 char dead[100] = "You Dead!\nScore : ";
@@ -22,11 +21,11 @@ void Screen :: draw(HDC hDC)
     SelectObject(hDC, hPen);
   
     for (int i = 0; i < this->sizex; i+=STEP) {
-	  MoveToEx(hDC, i, 0, NULL); //Ã±Ã¤Ã¥Ã«Ã Ã²Ã¼ Ã²Ã¥ÃªÃ³Ã¹Ã¨Ã¬Ã¨ ÃªÃ®Ã®Ã°Ã¤Ã¨Ã­Ã Ã²Ã» x1, y
+	  MoveToEx(hDC, i, 0, NULL); //ñäåëàòü òåêóùèìè êîîðäèíàòû x1, y
 	  LineTo(hDC, i, this->sizey);	
     }
     for (int i = 0; i < this->sizey; i+=STEP) {
-	  MoveToEx(hDC, 0, i, NULL); //Ã±Ã¤Ã¥Ã«Ã Ã²Ã¼ Ã²Ã¥ÃªÃ³Ã¹Ã¨Ã¬Ã¨ ÃªÃ®Ã®Ã°Ã¤Ã¨Ã­Ã Ã²Ã» x1, y
+	  MoveToEx(hDC, 0, i, NULL); //ñäåëàòü òåêóùèìè êîîðäèíàòû x1, y
 	  LineTo(hDC, this->sizey, i);	
     }
   	DeleteObject(hPen);
@@ -61,37 +60,37 @@ void Snake::draw(HDC hDC)
   
     for (int i = 0; i < this->len; i++) {
       if (i > 0) SelectObject(hDC, hPen);
-	  MoveToEx(hDC, this->coords[i].x * STEP, this->coords[i].y * STEP, NULL); //Ã±Ã¤Ã¥Ã«Ã Ã²Ã¼ Ã²Ã¥ÃªÃ³Ã¹Ã¨Ã¬Ã¨ ÃªÃ®Ã®Ã°Ã¤Ã¨Ã­Ã Ã²Ã» x1, y
+	  MoveToEx(hDC, this->coords[i].x * STEP, this->coords[i].y * STEP, NULL); //ñäåëàòü òåêóùèìè êîîðäèíàòû x1, y
 	  LineTo(hDC, this->coords[i].x * STEP + STEP, this->coords[i].y * STEP + STEP);	// /
 	  
-	  MoveToEx(hDC, this->coords[i].x * STEP + STEP, this->coords[i].y * STEP  , NULL); //Ã±Ã¤Ã¥Ã«Ã Ã²Ã¼ Ã²Ã¥ÃªÃ³Ã¹Ã¨Ã¬Ã¨ ÃªÃ®Ã®Ã°Ã¤Ã¨Ã­Ã Ã²Ã» x1, y
+	  MoveToEx(hDC, this->coords[i].x * STEP + STEP, this->coords[i].y * STEP  , NULL); //ñäåëàòü òåêóùèìè êîîðäèíàòû x1, y
 	  LineTo(hDC, this->coords[i].x * STEP, this->coords[i].y * STEP  + STEP);	// \
 	  
 	  
-	  MoveToEx(hDC, this->coords[i].x * STEP + STEP/2, this->coords[i].y * STEP, NULL); //Ã±Ã¤Ã¥Ã«Ã Ã²Ã¼ Ã²Ã¥ÃªÃ³Ã¹Ã¨Ã¬Ã¨ ÃªÃ®Ã®Ã°Ã¤Ã¨Ã­Ã Ã²Ã» x1, y
+	  MoveToEx(hDC, this->coords[i].x * STEP + STEP/2, this->coords[i].y * STEP, NULL); //ñäåëàòü òåêóùèìè êîîðäèíàòû x1, y
 	  LineTo(hDC, this->coords[i].x * STEP + STEP/2, this->coords[i].y * STEP + STEP);	// |
 	  
-	  MoveToEx(hDC, this->coords[i].x * STEP, this->coords[i].y * STEP + STEP/2, NULL); //Ã±Ã¤Ã¥Ã«Ã Ã²Ã¼ Ã²Ã¥ÃªÃ³Ã¹Ã¨Ã¬Ã¨ ÃªÃ®Ã®Ã°Ã¤Ã¨Ã­Ã Ã²Ã» x1, y
+	  MoveToEx(hDC, this->coords[i].x * STEP, this->coords[i].y * STEP + STEP/2, NULL); //ñäåëàòü òåêóùèìè êîîðäèíàòû x1, y
 	  LineTo(hDC, this->coords[i].x * STEP + STEP, this->coords[i].y * STEP + STEP/2);	// -
     }	
   	DeleteObject(hPen);
     if (this->move1 == 0) {
       SelectObject(hDC, hPenhead);
-	  MoveToEx(hDC, this->coords[0].x * STEP, this->coords[0].y * STEP, NULL); //Ã±Ã¤Ã¥Ã«Ã Ã²Ã¼ Ã²Ã¥ÃªÃ³Ã¹Ã¨Ã¬Ã¨ ÃªÃ®Ã®Ã°Ã¤Ã¨Ã­Ã Ã²Ã» x1, y
+	  MoveToEx(hDC, this->coords[0].x * STEP, this->coords[0].y * STEP, NULL); //ñäåëàòü òåêóùèìè êîîðäèíàòû x1, y
 	  LineTo(hDC, this->coords[0].x * STEP + STEP, this->coords[0].y * STEP + STEP);	// /
 	  
-	  MoveToEx(hDC, this->coords[0].x * STEP + STEP, this->coords[0].y * STEP , NULL); //Ã±Ã¤Ã¥Ã«Ã Ã²Ã¼ Ã²Ã¥ÃªÃ³Ã¹Ã¨Ã¬Ã¨ ÃªÃ®Ã®Ã°Ã¤Ã¨Ã­Ã Ã²Ã» x1, y
+	  MoveToEx(hDC, this->coords[0].x * STEP + STEP, this->coords[0].y * STEP , NULL); //ñäåëàòü òåêóùèìè êîîðäèíàòû x1, y
 	  LineTo(hDC, this->coords[0].x * STEP, this->coords[0].y * STEP + STEP);	// \
 	  
 	  
-	  MoveToEx(hDC, this->coords[0].x * STEP + STEP/2, this->coords[0].y * STEP, NULL); //Ã±Ã¤Ã¥Ã«Ã Ã²Ã¼ Ã²Ã¥ÃªÃ³Ã¹Ã¨Ã¬Ã¨ ÃªÃ®Ã®Ã°Ã¤Ã¨Ã­Ã Ã²Ã» x1, y
+	  MoveToEx(hDC, this->coords[0].x * STEP + STEP/2, this->coords[0].y * STEP, NULL); //ñäåëàòü òåêóùèìè êîîðäèíàòû x1, y
 	  LineTo(hDC, this->coords[0].x * STEP + STEP/2, this->coords[0].y * STEP + STEP);	// |
 	  
-	  MoveToEx(hDC, this->coords[0].x * STEP, this->coords[0].y * STEP + STEP/2, NULL); //Ã±Ã¤Ã¥Ã«Ã Ã²Ã¼ Ã²Ã¥ÃªÃ³Ã¹Ã¨Ã¬Ã¨ ÃªÃ®Ã®Ã°Ã¤Ã¨Ã­Ã Ã²Ã» x1, y
+	  MoveToEx(hDC, this->coords[0].x * STEP, this->coords[0].y * STEP + STEP/2, NULL); //ñäåëàòü òåêóùèìè êîîðäèíàòû x1, y
 	  LineTo(hDC, this->coords[0].x * STEP + STEP, this->coords[0].y * STEP + STEP/2);	// -
-	  char test[10];
-	  itoa(score,test, 10);	  	
-	  strcat(dead,test);
+	  char scr[10];
+	  itoa(score,scr, 10);	  	
+	  strcat(dead,scr);
 	  MessageBox(NULL, dead, "Fail", MB_OK);
 	  rungame = 0;
 	}
@@ -180,12 +179,30 @@ void Snake::eat(Apple* app){
     score++;
 }
 
+int Snake::getCoordsxi(int i){
+	return this->coords[i].x;
+}
+
+int Snake::getCoordsyi(int i){
+	return this->coords[i].y;
+}
+int Snake::getLen(){
+	return this->len;
+}
 Snake::~Snake(){
 	free(this->coords);
 }
 
-Apple::Apple() : Screen(SIZEX,SIZEY) {
-	this->generate();
+Apple::Apple(Snake* snk) : Screen(SIZEX,SIZEY) {
+	int flag = 1;
+	int leng = snk->getLen();
+	while (flag) {
+	flag = 0;
+    this->generate();
+    for (int i = 0;i < leng; i++) {
+    	if (this->getx() == snk->getCoordsxi(i) && this->gety() == snk->getCoordsyi(i) ) flag = 1;
+    }
+    }
 }
 
 void Apple::generate(){
