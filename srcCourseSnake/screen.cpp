@@ -1,9 +1,9 @@
-
 #include "snake.h"
-#define STEP 25
+#define STEP 10
 
 extern int rungame;
-
+extern int score;
+char dead[100] = "You Dead!\nScore : ";
 int getrand(int min, int max)
 {
     return rand() % (max - min) + min;
@@ -22,11 +22,11 @@ void Screen :: draw(HDC hDC)
     SelectObject(hDC, hPen);
   
     for (int i = 0; i < this->sizex; i+=STEP) {
-	  MoveToEx(hDC, i, 0, NULL); //Ã±Ã¤Ã¥Ã«Ã Ã²Ã¼ Ã²Ã¥ÃªÃ³Ã¹Ã¨Ã¬Ã¨ ÃªÃ®Ã®Ã°Ã¤Ã¨Ã­Ã Ã²Ã» x1, y
+	  MoveToEx(hDC, i, 0, NULL); //ñäåëàòü òåêóùèìè êîîðäèíàòû x1, y
 	  LineTo(hDC, i, this->sizey);	
     }
     for (int i = 0; i < this->sizey; i+=STEP) {
-	  MoveToEx(hDC, 0, i, NULL); //Ã±Ã¤Ã¥Ã«Ã Ã²Ã¼ Ã²Ã¥ÃªÃ³Ã¹Ã¨Ã¬Ã¨ ÃªÃ®Ã®Ã°Ã¤Ã¨Ã­Ã Ã²Ã» x1, y
+	  MoveToEx(hDC, 0, i, NULL); //ñäåëàòü òåêóùèìè êîîðäèíàòû x1, y
 	  LineTo(hDC, this->sizey, i);	
     }
   	DeleteObject(hPen);
@@ -61,36 +61,38 @@ void Snake::draw(HDC hDC)
   
     for (int i = 0; i < this->len; i++) {
       if (i > 0) SelectObject(hDC, hPen);
-	  MoveToEx(hDC, this->coords[i].x * STEP, this->coords[i].y * STEP, NULL); //Ã±Ã¤Ã¥Ã«Ã Ã²Ã¼ Ã²Ã¥ÃªÃ³Ã¹Ã¨Ã¬Ã¨ ÃªÃ®Ã®Ã°Ã¤Ã¨Ã­Ã Ã²Ã» x1, y
+	  MoveToEx(hDC, this->coords[i].x * STEP, this->coords[i].y * STEP, NULL); //ñäåëàòü òåêóùèìè êîîðäèíàòû x1, y
 	  LineTo(hDC, this->coords[i].x * STEP + STEP, this->coords[i].y * STEP + STEP);	// /
 	  
-	  MoveToEx(hDC, this->coords[i].x * STEP + STEP, this->coords[i].y * STEP  , NULL); //Ã±Ã¤Ã¥Ã«Ã Ã²Ã¼ Ã²Ã¥ÃªÃ³Ã¹Ã¨Ã¬Ã¨ ÃªÃ®Ã®Ã°Ã¤Ã¨Ã­Ã Ã²Ã» x1, y
+	  MoveToEx(hDC, this->coords[i].x * STEP + STEP, this->coords[i].y * STEP  , NULL); //ñäåëàòü òåêóùèìè êîîðäèíàòû x1, y
 	  LineTo(hDC, this->coords[i].x * STEP, this->coords[i].y * STEP  + STEP);	// \
 	  
 	  
-	  MoveToEx(hDC, this->coords[i].x * STEP + STEP/2, this->coords[i].y * STEP, NULL); //Ã±Ã¤Ã¥Ã«Ã Ã²Ã¼ Ã²Ã¥ÃªÃ³Ã¹Ã¨Ã¬Ã¨ ÃªÃ®Ã®Ã°Ã¤Ã¨Ã­Ã Ã²Ã» x1, y
+	  MoveToEx(hDC, this->coords[i].x * STEP + STEP/2, this->coords[i].y * STEP, NULL); //ñäåëàòü òåêóùèìè êîîðäèíàòû x1, y
 	  LineTo(hDC, this->coords[i].x * STEP + STEP/2, this->coords[i].y * STEP + STEP);	// |
 	  
-	  MoveToEx(hDC, this->coords[i].x * STEP, this->coords[i].y * STEP + STEP/2, NULL); //Ã±Ã¤Ã¥Ã«Ã Ã²Ã¼ Ã²Ã¥ÃªÃ³Ã¹Ã¨Ã¬Ã¨ ÃªÃ®Ã®Ã°Ã¤Ã¨Ã­Ã Ã²Ã» x1, y
+	  MoveToEx(hDC, this->coords[i].x * STEP, this->coords[i].y * STEP + STEP/2, NULL); //ñäåëàòü òåêóùèìè êîîðäèíàòû x1, y
 	  LineTo(hDC, this->coords[i].x * STEP + STEP, this->coords[i].y * STEP + STEP/2);	// -
     }	
   	DeleteObject(hPen);
     if (this->move1 == 0) {
       SelectObject(hDC, hPenhead);
-	  MoveToEx(hDC, this->coords[0].x * STEP, this->coords[0].y * STEP, NULL); //Ã±Ã¤Ã¥Ã«Ã Ã²Ã¼ Ã²Ã¥ÃªÃ³Ã¹Ã¨Ã¬Ã¨ ÃªÃ®Ã®Ã°Ã¤Ã¨Ã­Ã Ã²Ã» x1, y
+	  MoveToEx(hDC, this->coords[0].x * STEP, this->coords[0].y * STEP, NULL); //ñäåëàòü òåêóùèìè êîîðäèíàòû x1, y
 	  LineTo(hDC, this->coords[0].x * STEP + STEP, this->coords[0].y * STEP + STEP);	// /
 	  
-	  MoveToEx(hDC, this->coords[0].x * STEP + STEP, this->coords[0].y * STEP , NULL); //Ã±Ã¤Ã¥Ã«Ã Ã²Ã¼ Ã²Ã¥ÃªÃ³Ã¹Ã¨Ã¬Ã¨ ÃªÃ®Ã®Ã°Ã¤Ã¨Ã­Ã Ã²Ã» x1, y
+	  MoveToEx(hDC, this->coords[0].x * STEP + STEP, this->coords[0].y * STEP , NULL); //ñäåëàòü òåêóùèìè êîîðäèíàòû x1, y
 	  LineTo(hDC, this->coords[0].x * STEP, this->coords[0].y * STEP + STEP);	// \
 	  
 	  
-	  MoveToEx(hDC, this->coords[0].x * STEP + STEP/2, this->coords[0].y * STEP, NULL); //Ã±Ã¤Ã¥Ã«Ã Ã²Ã¼ Ã²Ã¥ÃªÃ³Ã¹Ã¨Ã¬Ã¨ ÃªÃ®Ã®Ã°Ã¤Ã¨Ã­Ã Ã²Ã» x1, y
+	  MoveToEx(hDC, this->coords[0].x * STEP + STEP/2, this->coords[0].y * STEP, NULL); //ñäåëàòü òåêóùèìè êîîðäèíàòû x1, y
 	  LineTo(hDC, this->coords[0].x * STEP + STEP/2, this->coords[0].y * STEP + STEP);	// |
 	  
-	  MoveToEx(hDC, this->coords[0].x * STEP, this->coords[0].y * STEP + STEP/2, NULL); //Ã±Ã¤Ã¥Ã«Ã Ã²Ã¼ Ã²Ã¥ÃªÃ³Ã¹Ã¨Ã¬Ã¨ ÃªÃ®Ã®Ã°Ã¤Ã¨Ã­Ã Ã²Ã» x1, y
+	  MoveToEx(hDC, this->coords[0].x * STEP, this->coords[0].y * STEP + STEP/2, NULL); //ñäåëàòü òåêóùèìè êîîðäèíàòû x1, y
 	  LineTo(hDC, this->coords[0].x * STEP + STEP, this->coords[0].y * STEP + STEP/2);	// -
-	  
-	  MessageBox(NULL, "You Dead", "Fail", MB_OK);
+	  char test[10];
+	  itoa(score,test, 10);	  	
+	  strcat(dead,test);
+	  MessageBox(NULL, dead, "Fail", MB_OK);
 	  rungame = 0;
 	}
   	DeleteObject(hPenhead);
@@ -106,7 +108,7 @@ void Snake::move(){
 	switch(this->vector){
   		case 3:{  
   		this->coords[0].x -= 1;
-  		if (this->coords[0].x < 0) this->coords[0].x = this->getkx() - 1;
+  		if (this->coords[0].x < 0) this->coords[0].x = this->getkx() - 1;  //if (this->coords[0].x < 0) move1 = 0;
     	};
 		break;
 			
@@ -163,11 +165,19 @@ int Snake::getHeady(){
 }
 
 void Snake::eat(Apple* app){
-	app->generate();
+	int flag = 1;
+	while (flag) {
+	flag = 0;
+    app->generate();
+    for (int i = 0;i < this->len; i++) {
+    	if (app->getkx() == this->coords[i].x && app->getky() == this->coords[i].y ) flag = 1;
+    }
+    }
 	this->len = this->len+1;
     this->coords = (coord*)realloc(this->coords ,sizeof(coord) * this->len);
     this->coords[len - 1].x = this->coords[len - 2].x;
     this->coords[len - 1].y = this->coords[len - 2].y;
+    score++;
 }
 
 Snake::~Snake(){
@@ -198,4 +208,3 @@ int Apple::gety(){
 	return xy.y;
 }
 Apple::~Apple(){}
-

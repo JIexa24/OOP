@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
+#include <string.h>
 #define SIZEX 700
 #define SIZEY 700
 typedef struct Coords { 
