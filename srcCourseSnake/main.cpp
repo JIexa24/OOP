@@ -3,6 +3,7 @@
 
 Screen scr(SIZEX,SIZEY);
 Snake sn(15,10);
+Apple app;
 int rungame = 1;
 using namespace std;
 
@@ -117,8 +118,9 @@ LRESULT CALLBACK WndProc(HWND hMainWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         hDC = BeginPaint(hMainWnd, &ps);//контекст устройства 
         GetClientRect(hMainWnd, &rect); // область рисования
 				HPEN hPen;	
-				//scr.draw(hDC);
+				scr.draw(hDC);
 				sn.draw(hDC);
+				app.draw(hDC);
 				sn.move();
 				Sleep(500);
         EndPaint(hMainWnd, &ps); //заканчиваем рисовать

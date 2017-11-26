@@ -3,22 +3,30 @@
 
 extern int rungame;
 
-void Screen :: draw(HDC hDC)
+int getrand(int min, int max)
 {
+    return rand() % (max - min) + min;
+}
+
+Screen::Screen(int x, int y):sizex(x),sizey(y){
 	this->ky = 0;
 	this->kx = 0;
+    for (int i = 0; i < this->sizex; i+=STEP) kx++;
+    for (int i = 0; i < this->sizey; i+=STEP) ky++;
+}
+
+void Screen :: draw(HDC hDC)
+{
 	HPEN hPen = CreatePen(PS_SOLID, 2,RGB(255,255,0));
     SelectObject(hDC, hPen);
   
-    for (int i = 0; i < this->sizex; i+=25) {
+    for (int i = 0; i < this->sizex; i+=STEP) {
 	  MoveToEx(hDC, i, 0, NULL); //сделать текущими координаты x1, y
 	  LineTo(hDC, i, this->sizey);	
-	  kx++;
     }
-    for (int i = 0; i < this->sizey; i+=25) {
+    for (int i = 0; i < this->sizey; i+=STEP) {
 	  MoveToEx(hDC, 0, i, NULL); //сделать текущими координаты x1, y
 	  LineTo(hDC, this->sizey, i);	
-	  ky++;
     }
   	DeleteObject(hPen);
 }
@@ -52,34 +60,34 @@ void Snake::draw(HDC hDC)
   
     for (int i = 0; i < this->len; i++) {
       if (i > 0) SelectObject(hDC, hPen);
-	  MoveToEx(hDC, this->coords[i].x * 25, this->coords[i].y * 25, NULL); //сделать текущими координаты x1, y
-	  LineTo(hDC, this->coords[i].x * 25 + 25, this->coords[i].y * 25 + 25);	// /
+	  MoveToEx(hDC, this->coords[i].x * STEP, this->coords[i].y * STEP, NULL); //сделать текущими координаты x1, y
+	  LineTo(hDC, this->coords[i].x * STEP + STEP, this->coords[i].y * STEP + STEP);	// /
 	  
-	  MoveToEx(hDC, this->coords[i].x * 25 + 25, this->coords[i].y * 25 , NULL); //сделать текущими координаты x1, y
-	  LineTo(hDC, this->coords[i].x * 25, this->coords[i].y * 25 + 25);	// \
+	  MoveToEx(hDC, this->coords[i].x * STEP + STEP, this->coords[i].y * STEP , NULL); //сделать текущими координаты x1, y
+	  LineTo(hDC, this->coords[i].x * STEP, this->coords[i].y * STEP + STEP);	// \
 	  
 	  
-	  MoveToEx(hDC, this->coords[i].x * 25 + 12, this->coords[i].y * 25, NULL); //сделать текущими координаты x1, y
-	  LineTo(hDC, this->coords[i].x * 25 + 12, this->coords[i].y * 25 + 25);	// |
+	  MoveToEx(hDC, this->coords[i].x * STEP + STEP/2, this->coords[i].y * STEP, NULL); //сделать текущими координаты x1, y
+	  LineTo(hDC, this->coords[i].x * STEP + STEP/2, this->coords[i].y * STEP + STEP);	// |
 	  
-	  MoveToEx(hDC, this->coords[i].x * 25, this->coords[i].y * 25 + 12, NULL); //сделать текущими координаты x1, y
-	  LineTo(hDC, this->coords[i].x * 25 + 25, this->coords[i].y * 25 + 12);	// -
+	  MoveToEx(hDC, this->coords[i].x * STEP, this->coords[i].y * STEP + STEP/2, NULL); //сделать текущими координаты x1, y
+	  LineTo(hDC, this->coords[i].x * STEP + STEP, this->coords[i].y * STEP + STEP/2);	// -
     }	
   	DeleteObject(hPen);
     if (this->move1 == 0) {
       SelectObject(hDC, hPenhead);
-	  MoveToEx(hDC, this->coords[0].x * 25, this->coords[0].y * 25, NULL); //сделать текущими координаты x1, y
-	  LineTo(hDC, this->coords[0].x * 25 + 25, this->coords[0].y * 25 + 25);	// /
+	  MoveToEx(hDC, this->coords[0].x * STEP, this->coords[0].y * STEP, NULL); //сделать текущими координаты x1, y
+	  LineTo(hDC, this->coords[0].x * STEP + STEP, this->coords[0].y * STEP + STEP);	// /
 	  
-	  MoveToEx(hDC, this->coords[0].x * 25 + 25, this->coords[0].y * 25 , NULL); //сделать текущими координаты x1, y
-	  LineTo(hDC, this->coords[0].x * 25, this->coords[0].y * 25 + 25);	// \
+	  MoveToEx(hDC, this->coords[0].x * STEP + STEP, this->coords[0].y * STEP , NULL); //сделать текущими координаты x1, y
+	  LineTo(hDC, this->coords[0].x * STEP, this->coords[0].y * STEP + STEP);	// \
 	  
 	  
-	  MoveToEx(hDC, this->coords[0].x * 25 + 12, this->coords[0].y * 25, NULL); //сделать текущими координаты x1, y
-	  LineTo(hDC, this->coords[0].x * 25 + 12, this->coords[0].y * 25 + 25);	// |
+	  MoveToEx(hDC, this->coords[0].x * STEP + STEP/2, this->coords[0].y * STEP, NULL); //сделать текущими координаты x1, y
+	  LineTo(hDC, this->coords[0].x * STEP + STEP/2, this->coords[0].y * STEP + STEP);	// |
 	  
-	  MoveToEx(hDC, this->coords[0].x * 25, this->coords[0].y * 25 + 12, NULL); //сделать текущими координаты x1, y
-	  LineTo(hDC, this->coords[0].x * 25 + 25, this->coords[0].y * 25 + 12);	// -
+	  MoveToEx(hDC, this->coords[0].x * STEP, this->coords[0].y * STEP + STEP/2, NULL); //сделать текущими координаты x1, y
+	  LineTo(hDC, this->coords[0].x * STEP + STEP, this->coords[0].y * STEP + STEP/2);	// -
 	  
 	  MessageBox(NULL, "You Dead", "Fail", MB_OK);
 	  rungame = 0;
@@ -150,12 +158,15 @@ Apple::Apple() : Screen(SIZEX,SIZEY) {
 }
 
 void Apple::generate(){
-	this->xy.x = rand() % getkx();
-	this->xy.y = rand() % getky();
+	this->xy.x = getrand(0, getkx()+1) * STEP;
+	this->xy.y = getrand(0, getky()+1) * STEP;
 }
 
 void Apple::draw(HDC hDC){
-	
+	HPEN hPen = CreatePen(PS_SOLID, 4, RGB(255,0,0));
+    SelectObject(hDC, hPen);
+	Rectangle(hDC, this->xy.x, this->xy.y, this->xy.x + STEP, this->xy.y + STEP);
+	DeleteObject(hPen);
 }
 
 Apple::~Apple(){}

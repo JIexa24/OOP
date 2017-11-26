@@ -1,8 +1,10 @@
 #include <windows.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <time.h>
 #define SIZEX 700
 #define SIZEY 700
+#define STEP 25
 typedef struct Coords { 
 int x; 
 int y; 
@@ -20,7 +22,7 @@ private:
   int kx;
   int ky;
 public: 
-  Screen(int x, int y):sizex(x),sizey(y){}; 
+  Screen(int x, int y); 
   int getkx();
   int getky();
   virtual void draw(HDC hDC); 
