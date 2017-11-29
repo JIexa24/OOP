@@ -3,8 +3,8 @@
 #include <stdio.h>
 #include <time.h>
 #include <string.h>
-#define SIZEX 700
-#define SIZEY 700
+#define SIZEX 500
+#define SIZEY 500
 typedef struct Coords { 
 int x; 
 int y; 

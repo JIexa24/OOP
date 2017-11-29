@@ -17,17 +17,31 @@ Screen::Screen(int x, int y):sizex(x),sizey(y){
 
 void Screen :: draw(HDC hDC)
 {
-	HPEN hPen = CreatePen(PS_SOLID, 2,RGB(255,255,0));
+	HPEN hPen = CreatePen(PS_SOLID, 4,RGB(255,255,0));
     SelectObject(hDC, hPen);
-  
-    for (int i = 0; i < this->sizex; i+=STEP) {
-	  MoveToEx(hDC, i, 0, NULL); //сделать текущими координаты x1, y
-	  LineTo(hDC, i, this->sizey);	
+    
+	MoveToEx(hDC, 0, 0, NULL);
+	LineTo(hDC, this->kx * STEP, 0);	
+	
+	MoveToEx(hDC, this->kx * STEP, 0, NULL);
+	LineTo(hDC, this->kx * STEP, this->ky * STEP);
+		
+	MoveToEx(hDC, this->kx * STEP, this->ky * STEP, NULL);
+	LineTo(hDC, 0, this->ky * STEP);	
+	
+	MoveToEx(hDC, 0, this->ky * STEP, NULL);
+	LineTo(hDC, 0, 0);	
+    
+  /*
+    for (int i = 0; i <= this->kx; i++) {
+	  MoveToEx(hDC, i * STEP, 0, NULL); //сделать текущими координаты x1, y
+	  LineTo(hDC, i * STEP, this->ky * STEP);	
     }
-    for (int i = 0; i < this->sizey; i+=STEP) {
-	  MoveToEx(hDC, 0, i, NULL); //сделать текущими координаты x1, y
-	  LineTo(hDC, this->sizey, i);	
+    for (int i = 0; i <= this->ky; i++) {
+	  MoveToEx(hDC, 0,i * STEP, NULL); //сделать текущими координаты x1, y
+	  LineTo(hDC, this->kx * STEP,i * STEP);	
     }
+  */
   	DeleteObject(hPen);
 }
 
