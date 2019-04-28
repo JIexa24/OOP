@@ -182,58 +182,58 @@ LRESULT CALLBACK WndProc(HWND hMainWnd, UINT uMsg, WPARAM wParam,
                                 if (xCntr >= absX && yCntr <= absY) {
           if (xCntr <= absX+(Radius/2)*sqrt(2)){
               xCntr = xCntr+Step;
-              
+              
               yCntr = absY - sqrt(pow(Radius,2) - pow((xCntr >= absX)*(xCntr -
 absX)+(xCntr < absX)*(absX -xCntr),2));
-            
+            
                                                     } else{
               yCntr = yCntr+Step;
               xCntr = absX + sqrt(pow(Radius,2) - pow((yCntr >= absY)*(yCntr -
 absY)+(yCntr < absY)*(absY -yCntr),2));
-                                                            
+                                                            
                                                     }
                                             } else if (xCntr >= absX && yCntr >=
 absY) { if (xCntr >= absX+(Radius/2)*sqrt(2)){
-            
+            
               yCntr = yCntr+Step;
               xCntr = absX + sqrt(pow(Radius,2) - pow((yCntr >= absY)*(yCntr -
 absY)+(yCntr < absY)*(absY -yCntr),2));
-                                                                            
+                                                                            
                                                     } else{
                                                         xCntr = xCntr-Step;
               yCntr = absY + sqrt(pow(Radius,2) - pow((xCntr >= absX)*(xCntr -
 absX)+(xCntr < absX)*(absX -xCntr),2));
                                                             }
-                                            
+                                            
                                             } else if (xCntr <= absX && yCntr >=
 absY) { if (xCntr >= absX-(Radius/2)*sqrt(2)){ xCntr = xCntr - Step;
-              
+              
               yCntr = absY + sqrt(pow(Radius,2) - pow((xCntr >= absX)*(xCntr -
 absX)+(xCntr < absX)*(absX -xCntr),2));
-              
-            
+              
+            
                                                     } else{
               yCntr = yCntr - Step;
               xCntr = absX - sqrt(pow(Radius,2) - pow((yCntr >= absY)*(yCntr -
 absY)+(yCntr < absY)*(absY - yCntr),2));
-                                                                    
+                                                                    
                                                     }
                                             } else if (xCntr <= absX && yCntr <=
 absY) { if (xCntr <= absX-(Radius/2)*sqrt(2)){
-
+
               yCntr = yCntr-Step;
               xCntr = absX - sqrt(pow(Radius,2) - pow((yCntr >= absY)*(yCntr -
 absY)+(yCntr < absY)*(absY -yCntr),2));
-            
+            
                                                     } else{
               xCntr = xCntr + Step;
               yCntr = absY - sqrt(pow(Radius,2) - pow((xCntr >= absX)*(xCntr -
 absX)+(xCntr < absX)*(absX - xCntr),2));
                                                             }
-                                                            
+                                                            
                                                     }
-                                                                    
-                            
+                                                                    
+                            
 xTriang[0] = xCntr;
 xTriang[1] = xCntr+radius;
 xTriang[2] = xCntr+2*radius;
